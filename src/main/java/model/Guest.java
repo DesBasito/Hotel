@@ -1,19 +1,14 @@
 package model;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Guest {
     private String name;
     private String email;
-
-    public Guest(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
 }
