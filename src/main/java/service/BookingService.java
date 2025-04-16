@@ -1,6 +1,7 @@
 package service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import model.Guest;
 import model.Hotel;
 import model.Room;
@@ -14,14 +15,22 @@ import java.time.temporal.ChronoUnit;
 public class BookingService {
     public static final int DIS_DAYS = 3;
     public static final int DISCOUNT = 6;
+
     public boolean isRoomAvailable(Room room, LocalDate checkIn, LocalDate checkOut) {
-        // TODO: Реализовать проверку доступности номера
-        return false;
+        return checkOut.isBefore(room.getLastCheckIn()) || checkIn.isAfter(room.getLastCheckOut());
     }
 
+    @SneakyThrows
     public boolean bookRoom(Hotel hotel, Room room, Guest guest, LocalDate checkIn, LocalDate checkOut) {
-        // TODO: Реализовать логику бронирования номера
-        return false;
+        if (checkOut.isBefore(checkIn)){
+            throw new IllegalArgumentException();
+        }
+        if (isRoomAvailable(room,checkIn,checkOut)){
+            calculatePrice(room,checkIn,checkOut);
+            return true;
+        }else {
+            return false;
+        }
     }
 
     public double calculatePrice(Room room, LocalDate checkIn, LocalDate checkOut) {
