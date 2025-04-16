@@ -42,6 +42,6 @@ public class BookingService {
 
         double amountWithTax = PaymentService.applyTax(billPrice);
 
-        return days >= DIS_DAYS ? amountWithTax : PaymentService.applyDiscount(amountWithTax, DISCOUNT);
+        return days <= DIS_DAYS ? amountWithTax : PaymentService.applyDiscount(amountWithTax, DISCOUNT);
     }
 }
